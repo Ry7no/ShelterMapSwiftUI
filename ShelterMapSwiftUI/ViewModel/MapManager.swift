@@ -9,11 +9,9 @@ import Foundation
 import MapKit
 import SwiftUI
 
-
 class MapManager: ObservableObject {
 
     @ObservedObject private var locationManager = LocationManager()
-    private var dataManager = DataManager()
     
     @Published var shelters: [Shelter] = []
 
@@ -24,28 +22,37 @@ class MapManager: ObservableObject {
     }
     
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
-    let shelterSpan = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+    let shelterSpan = MKCoordinateSpan(latitudeDelta: 0.0008, longitudeDelta: 0.0008)
     
     @Published var showShelterList: Bool = false
     
     @Published var sheetShelter: Shelter? = nil
+    @Published var isCenter = false
     
     init() {
-  
-        var shelters = dataManager.nearShelters
-//        var shelters = DBManager().getNearShelters()
-        if shelters.isEmpty {
-            shelters.append(Shelter.init(category: "", code: "", village: "", address: "", latitude: "", longitude: "", underFloor: "", capacity: "0", office: "", remarks: "", distance: 0.0))
-        }
+        
+        var shelters = SqliteManager().shelters
+        
+        print("@init shelters array")
+
+        print(shelters.count)
         self.shelters = shelters
-        
-        self.mapShelter = shelters.first!
-        
+
+        self.mapShelter = shelters.first ?? Shelter(category: "", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
+
         DispatchQueue.main.async {
             withAnimation {
                 self.mapRegion.center = self.locationManager.userPosition
                 self.mapRegion.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             }
+        }
+    }
+    
+    func checkCenter() {
+        if mapRegion.center.latitude.round(to: 4) == self.locationManager.userPosition.latitude.round(to: 4) {
+            self.isCenter = true
+        } else {
+            self.isCenter = false
         }
     }
 
@@ -55,6 +62,7 @@ class MapManager: ObservableObject {
                 center: shelter.coordinates,
                 span: shelterSpan)
         }
+        print("\(mapShelter.category) ?? \(shelter.category)")
     }
     
     func toggleSheltersList() {
@@ -67,22 +75,30 @@ class MapManager: ObservableObject {
         withAnimation(.easeInOut) {
             mapShelter = shelter
             showShelterList = false
+            print("\(mapShelter.category) : \(shelter.category)")
         }
     }
     
     func nextButtonPressed() {
         
         guard let currentIndex = shelters.firstIndex(where: { $0 == mapShelter }) else { return }
-        
+
         let nextIndex = currentIndex + 1
         guard shelters.indices.contains(nextIndex) else {
             guard let firstShelter = shelters.first else { return }
             showNextShelter(shelter: firstShelter)
             return
         }
-        
+
         let nextShelter = shelters[nextIndex]
         showNextShelter(shelter: nextShelter)
+    }
+    
+    func resetCamera() {
+        withAnimation {
+            self.mapRegion.center = self.locationManager.userPosition
+            self.mapRegion.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        }
     }
     
     func openMapsAppWithDirections(to coordinate: CLLocationCoordinate2D, destinationName name: String) {

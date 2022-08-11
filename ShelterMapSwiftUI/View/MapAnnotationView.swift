@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MapAnnotationView: View {
-    
-    @State var name: String
-    @State var capacity: String
+
+    @EnvironmentObject private var mapManager: MapManager
+    let shelter: Shelter
     
     @State private var annotationColorDigits2 = Color("Red1")
     @State private var annotationColorDigits3 = Color("Red2")
@@ -22,18 +22,18 @@ struct MapAnnotationView: View {
             
             VStack(spacing: 0) {
                 
-                Text(name.prefix(2))
+                Text(shelter.category.prefix(2))
                     .font(.system(size: 12.5).bold())
-                    .foregroundColor(Int(capacity)! < 99 ? annotationColorDigits2 : (Int(capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
+                    .foregroundColor(Int(shelter.capacity) ?? 0 < 99 ? annotationColorDigits2 : (Int(shelter.capacity) ?? 0 > 999 ? annotationColorDigits4 : annotationColorDigits3))
                     .frame(width: 40, height: 40)
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 3.5).foregroundColor(Int(capacity)! < 99 ? annotationColorDigits2 : (Int(capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3)))
+                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 3.5).foregroundColor(Int(shelter.capacity) ?? 0 < 99 ? annotationColorDigits2 : (Int(shelter.capacity) ?? 0 > 999 ? annotationColorDigits4 : annotationColorDigits3)))
                 
                 Image(systemName: "triangle.fill")
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(Int(capacity)! < 99 ? annotationColorDigits2 : (Int(capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
+                    .foregroundColor(Int(shelter.capacity) ?? 0 < 99 ? annotationColorDigits2 : (Int(shelter.capacity) ?? 0 > 999 ? annotationColorDigits4 : annotationColorDigits3))
                     .frame(width: 7, height: 7)
                     .rotationEffect(Angle(degrees: 180))
                     .scaleEffect(x: 1.1, y: 0.7, anchor: .center)
@@ -48,7 +48,7 @@ struct MapAnnotationView: View {
                     .font(.system(size: 6).bold())
                     .foregroundColor(Color(UIColor.lightGray))
 
-                Text(capacity)
+                Text(shelter.capacity)
                     .font(.system(size: 6).bold())
                     .foregroundColor(.white)
                     
@@ -61,6 +61,7 @@ struct MapAnnotationView: View {
             .offset(x: -15, y: -6)
             
         }
+//        .opacity(shelter.capacity == "0" ? 0 : 1)
         
     }
 }

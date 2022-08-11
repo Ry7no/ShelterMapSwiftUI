@@ -10,6 +10,7 @@ import SwiftUI
 struct ShelterPreview: View {
     
     @EnvironmentObject private var mapManager: MapManager
+    @Environment(\.colorScheme) var scheme
     
     @State private var annotationColorDigits2 = Color("Red1")
     @State private var annotationColorDigits3 = Color("Red2")
@@ -20,53 +21,95 @@ struct ShelterPreview: View {
 
     var body: some View {
         
-        HStack(alignment: .bottom, spacing: 0) {
+        ZStack(alignment: .topLeading) {
             
-            VStack(alignment: .leading, spacing: 5) {
+            HStack(alignment: .bottom, spacing: 0) {
                 
-                Text(shelter.category)
-                    .font(.system(size: 22).bold())
-                    .foregroundColor(Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    .background {
-                        Color.white
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 4)
-                            .foregroundColor(Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
-                    }
-                    .padding(.bottom, 10)
-                
-                Text("地址：\(shelter.address)")
-                    .font(.system(size: 14))
-                Text("位置：位於地下 \(shelter.underFloor) 層樓")
-                    .font(.system(size: 14))
-                Text("容量：可容納 \(shelter.capacity) 人")
-                    .font(.system(size: 14))
-                Text("距離：直線約距 \(Int(shelter.distance)) 米")
-                    .font(.system(size: 14))
-                
-            }
-            
-            VStack(spacing: 8) {
-                
-                Button {
-                    mapManager.openMapsAppWithDirections(to: shelter.coordinates, destinationName: shelter.address)
-                } label: {
-                    Text("導航前往")
-                }
+                VStack(alignment: .leading, spacing: 5) {
 
+                    Text("")
+                        .frame(height: 15)
+                    
+                    HStack(alignment: .top, spacing: 0) {
+                        Text("地址：")
+                            .font(.system(size: 14)).bold()
+                        Text(shelter.address)
+                            .font(.system(size: 14))
+                    }
+                    
+                    HStack(alignment: .top, spacing: 0) {
+                        Text("位置：")
+                            .font(.system(size: 14)).bold()
+                        Text("位於地下 \(shelter.underFloor) 層樓")
+                            .font(.system(size: 14))
+                    }
+                    
+                    HStack(alignment: .top, spacing: 0) {
+                        Text("容量：")
+                            .font(.system(size: 14)).bold()
+                        Text("可容納 \(shelter.capacity) 人")
+                            .font(.system(size: 14))
+                    }
+                    
+                    HStack(alignment: .top, spacing: 0) {
+                        Text("距離：")
+                            .font(.system(size: 14)).bold()
+                        Text("直線距約 \(Int(shelter.distance)) 米")
+                            .font(.system(size: 14))
+                    }
+
+                }
+                
+                
+                VStack(spacing: 20) {
+                    
+                    Button {
+                        mapManager.openMapsAppWithDirections(to: shelter.coordinates, destinationName: shelter.address)
+                    } label: {
+                        Text("導航前往")
+                            .font(.system(size: 15).bold())
+                    }
+                    
+                }
             }
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.ultraThinMaterial)
+            )
+            .cornerRadius(10)
+            .overlay {
+                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+            }
+            .shadow(color: Color.black.opacity(0.3), radius: 20, x: 5, y: 5)
+            
+            Text(shelter.category)
+                .font(.system(size: 22).bold())
+                .foregroundColor(scheme == .dark ? .white : Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
+                .padding(.horizontal)
+                .padding(.vertical, 10)
+//                .background {
+//                    Color.white.opacity(0.8)
+//                }
+                .background(.thinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 4)
+                        .foregroundColor(Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 4)
+                        .foregroundColor(.white.opacity(scheme == .dark ? 0.3 : 0))
+                }
+                .padding(.bottom, 10)
+                .rotationEffect(Angle(degrees: -3))
+                .animation(Animation.easeInOut(duration: 0.4))
+                .offset(x: 20, y: -20)
+                .shadow(color: Color.black.opacity(0.15), radius: 8, x: 5, y: 5)
+            
         }
-        .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.ultraThinMaterial)
-                .offset(y: 40)
-        )
-        .cornerRadius(10)
+        
+        
     }
 }
 

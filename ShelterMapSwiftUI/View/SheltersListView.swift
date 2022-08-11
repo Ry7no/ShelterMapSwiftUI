@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SheltersListView: View {
     
+//    @ObservedObject var mapManager = MapManager()
     @EnvironmentObject private var mapManager: MapManager
     
     private var annotationColorDigits2 = Color("Red1")
@@ -53,21 +54,23 @@ extension SheltersListView {
                     .foregroundColor(.white)
             }
             .padding(.horizontal, 5)
-            .frame(width: Int(shelter.distance) > 99 ? 53 : 45, height: 45, alignment: .trailing)
+            .frame(width: Int(shelter.distance) > 99 ? 55 : 45, height: 45, alignment: .trailing)
             .background(Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
             .cornerRadius(10)
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text("\(shelter.category) - 地下\(shelter.underFloor)樓")
-                        .font(.headline)
-                    
+                    Text(shelter.underFloor == "0" ? "\(shelter.category) - 地上層" : "\(shelter.category) - 地下 \(shelter.underFloor) 樓")
+                        .font(.system(size: 15).bold())
+
                     Text("[ 可容納\(shelter.capacity)人 ]")
-                        .font(.caption)
+                        .font(.system(size: 11).bold())
                         .foregroundColor(.gray)
                 }
+                .padding(.bottom, 0.5)
+                
                 Text(shelter.address)
-                    .font(.subheadline)
+                    .font(.system(size: 12))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

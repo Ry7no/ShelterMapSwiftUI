@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct ShelterMapSwiftUIApp: App {
+    
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var mapManager = MapManager()
+    @StateObject private var sqliteManager = SqliteManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(LocationManager())
-                .environmentObject(DataManager())
-                .environmentObject(MapManager())
+                .environmentObject(locationManager)
+                .environmentObject(mapManager)
+                .environmentObject(sqliteManager)
+                
+                
         }
     }
 }

@@ -9,16 +9,16 @@
 /* Begin PBXBuildFile section */
 		FDC74DB3289CD51300BA9BD0 /* SheltersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */; };
 		FDD19B04289FA8F700D04373 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = FDD19B03289FA8F700D04373 /* SQLite */; };
-		FDD19B06289FAA5200D04373 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B05289FAA5200D04373 /* DBManager.swift */; };
+		FDD19B0F28A22F7000D04373 /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B0E28A22F7000D04373 /* SqliteManager.swift */; };
+		FDD19B2828A4E91A00D04373 /* SliderAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */; };
+		FDD19B3828A5641C00D04373 /* all.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD19B3728A5641C00D04373 /* all.sqlite */; };
 		FDFB0997289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */; };
 		FDFB0999289B7AA800FDF491 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0998289B7AA800FDF491 /* ContentView.swift */; };
 		FDFB099B289B7AA900FDF491 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDFB099A289B7AA900FDF491 /* Assets.xcassets */; };
 		FDFB099E289B7AA900FDF491 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDFB099D289B7AA900FDF491 /* Preview Assets.xcassets */; };
 		FDFB09A8289B7B0B00FDF491 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09A7289B7B0B00FDF491 /* LocationManager.swift */; };
 		FDFB09AA289B7B4F00FDF491 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09A9289B7B4F00FDF491 /* MapView.swift */; };
-		FDFB09AC289B902200FDF491 /* Taichung.csv in Resources */ = {isa = PBXBuildFile; fileRef = FDFB09AB289B902200FDF491 /* Taichung.csv */; };
 		FDFB09AE289B9B5E00FDF491 /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09AD289B9B5E00FDF491 /* Shelter.swift */; };
-		FDFB09B0289B9BD300FDF491 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09AF289B9BD300FDF491 /* DataManager.swift */; };
 		FDFB09B2289B9D0B00FDF491 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */; };
 		FDFB09B5289CA6D400FDF491 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B4289CA6D400FDF491 /* MapManager.swift */; };
 		FDFB09B7289CC07A00FDF491 /* ShelterPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */; };
@@ -26,7 +26,10 @@
 
 /* Begin PBXFileReference section */
 		FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheltersListView.swift; sourceTree = "<group>"; };
-		FDD19B05289FAA5200D04373 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		FDD19B0A28A1FD7800D04373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FDD19B0E28A22F7000D04373 /* SqliteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
+		FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderAlertView.swift; sourceTree = "<group>"; };
+		FDD19B3728A5641C00D04373 /* all.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = all.sqlite; sourceTree = "<group>"; };
 		FDFB0993289B7AA800FDF491 /* ShelterMapSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShelterMapSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterMapSwiftUIApp.swift; sourceTree = "<group>"; };
 		FDFB0998289B7AA800FDF491 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,11 +37,8 @@
 		FDFB099D289B7AA900FDF491 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FDFB09A7289B7B0B00FDF491 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		FDFB09A9289B7B4F00FDF491 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		FDFB09AB289B902200FDF491 /* Taichung.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Taichung.csv; sourceTree = "<group>"; };
 		FDFB09AD289B9B5E00FDF491 /* Shelter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
-		FDFB09AF289B9BD300FDF491 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
-		FDFB09B3289BB60700FDF491 /* MyFlyLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyFlyLocation.gpx; sourceTree = "<group>"; };
 		FDFB09B4289CA6D400FDF491 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,7 +58,6 @@
 		FDFB098A289B7AA800FDF491 = {
 			isa = PBXGroup;
 			children = (
-				FDFB09B3289BB60700FDF491 /* MyFlyLocation.gpx */,
 				FDFB0995289B7AA800FDF491 /* ShelterMapSwiftUI */,
 				FDFB0994289B7AA800FDF491 /* Products */,
 			);
@@ -75,7 +74,8 @@
 		FDFB0995289B7AA800FDF491 /* ShelterMapSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				FDFB09AB289B902200FDF491 /* Taichung.csv */,
+				FDD19B0A28A1FD7800D04373 /* Info.plist */,
+				FDD19B3728A5641C00D04373 /* all.sqlite */,
 				FDFB09A6289B7AF800FDF491 /* Model */,
 				FDFB09A5289B7AF000FDF491 /* ViewModel */,
 				FDFB09A4289B7AE600FDF491 /* View */,
@@ -102,6 +102,7 @@
 				FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */,
 				FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */,
 				FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */,
+				FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,10 +110,9 @@
 		FDFB09A5289B7AF000FDF491 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				FDFB09AF289B9BD300FDF491 /* DataManager.swift */,
 				FDFB09A7289B7B0B00FDF491 /* LocationManager.swift */,
 				FDFB09B4289CA6D400FDF491 /* MapManager.swift */,
-				FDD19B05289FAA5200D04373 /* DBManager.swift */,
+				FDD19B0E28A22F7000D04373 /* SqliteManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -190,8 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDFB099E289B7AA900FDF491 /* Preview Assets.xcassets in Resources */,
+				FDD19B3828A5641C00D04373 /* all.sqlite in Resources */,
 				FDFB099B289B7AA900FDF491 /* Assets.xcassets in Resources */,
-				FDFB09AC289B902200FDF491 /* Taichung.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,16 +203,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDFB09AE289B9B5E00FDF491 /* Shelter.swift in Sources */,
-				FDFB09B0289B9BD300FDF491 /* DataManager.swift in Sources */,
 				FDC74DB3289CD51300BA9BD0 /* SheltersListView.swift in Sources */,
+				FDD19B0F28A22F7000D04373 /* SqliteManager.swift in Sources */,
 				FDFB0999289B7AA800FDF491 /* ContentView.swift in Sources */,
+				FDD19B2828A4E91A00D04373 /* SliderAlertView.swift in Sources */,
 				FDFB09AA289B7B4F00FDF491 /* MapView.swift in Sources */,
 				FDFB09B7289CC07A00FDF491 /* ShelterPreview.swift in Sources */,
 				FDFB09B5289CA6D400FDF491 /* MapManager.swift in Sources */,
 				FDFB0997289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift in Sources */,
 				FDFB09A8289B7B0B00FDF491 /* LocationManager.swift in Sources */,
 				FDFB09B2289B9D0B00FDF491 /* MapAnnotationView.swift in Sources */,
-				FDD19B06289FAA5200D04373 /* DBManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +344,7 @@
 				DEVELOPMENT_TEAM = 48394HVWDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShelterMapSwiftUI/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -376,6 +377,7 @@
 				DEVELOPMENT_TEAM = 48394HVWDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShelterMapSwiftUI/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

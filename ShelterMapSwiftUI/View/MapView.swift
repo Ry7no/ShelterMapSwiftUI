@@ -11,16 +11,23 @@ import MapKit
 struct MapView: View {
     
     @EnvironmentObject private var locationManager: LocationManager
-    @EnvironmentObject private var dataManager: DataManager
+//    @EnvironmentObject private var dataManager: DataManager
     @EnvironmentObject private var mapManager: MapManager
+    @EnvironmentObject private var sqliteManager: SqliteManager
 
+    @Environment(\.colorScheme) var scheme
+    
     @State var tracking: MapUserTrackingMode = .none
+    @State var isExtending: Bool = false
     
     private let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
     @State private var isBreathing: Bool = false
     @State private var isShakeAnimating: Bool = false
+    @State private var isShowingAlert = false
+    @State private var isUserCenter = false
     
     @State var shelters: [Shelter] = []
+    @State var distance: Double = 0.0
     
     var body: some View {
 
@@ -29,26 +36,136 @@ struct MapView: View {
             mapLayer
                 .ignoresSafeArea()
             
-            if dataManager.nearShelters.isEmpty {
+            if mapManager.shelters.isEmpty {
                 ProgressView()
                     .tint(.red)
                     .scaleEffect(x: 2, y: 2, anchor: .center)
             } else {
-                VStack {
+                VStack(alignment: .center) {
                     header
                         .padding()
                     
                     Spacer()
                     
+                    HStack {
+                        
+                        HStack(spacing: 25) {
+                            
+                            Button {
+                                
+                                withAnimation(.easeInOut(duration: 0.4)) {
+                                    self.isExtending.toggle()
+                                }
+                                
+                            } label: {
+                                Image(systemName: "gearshape.fill")
+                                    .font(.system(size: 20).bold())
+                                    .rotationEffect(Angle(degrees: isExtending ? 180 : 0))
+                                    .scaledToFit()
+                                    .foregroundColor(scheme == .dark ? .white : .black)
+                                    .padding()
+//                                    .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
+                                    .background(content: {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.ultraThinMaterial)
+                                    })
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+                                    }
+
+                            }
+                            
+                            HStack(spacing: 25) {
+                                
+                                Button {
+                                    mapManager.resetCamera()
+                                } label: {
+                                    Image(systemName: mapManager.isCenter ? "location.fill" : "location")
+                                        .font(.system(size: 14).bold())
+                                        .scaledToFit()
+                                        .foregroundColor(scheme == .dark ? .white : .black)
+                                        .padding()
+//                                        .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
+                                        .background(content: {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.thinMaterial)
+                                        })
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+                                        }
+                                }
+                                
+                                Button {
+                                    withAnimation {
+                                        self.isShowingAlert.toggle()
+                                    }
+                                    
+                                } label: {
+                                    Image(systemName: "barometer")
+                                        .font(.system(size: 18).bold())
+                                        .scaledToFit()
+                                        .foregroundColor(scheme == .dark ? .white : .black)
+                                        .padding()
+//                                        .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
+                                        .background(content: {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.thinMaterial)
+                                        })
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+                                        }
+                                }
+                            }
+                            .opacity(isExtending ? 1 : 0)
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            mapManager.nextButtonPressed()
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 22).bold())
+                                .scaledToFit()
+                                .foregroundColor(scheme == .dark ? .white : .black)
+                                .padding()
+//                                .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
+                                .background(content: {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.ultraThinMaterial)
+                                })
+                                .frame(width: 50, height: 50)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+                                }
+                        }
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, 30)
+                    
                     shelterPreviewStack
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, 15)
+
                 }
             }
 
         }
+        .sliderAlert(isShowing: $isShowingAlert)
         .onAppear {
             DispatchQueue.main.async {
-                dataManager.convertCSVFile(name: "Taichung")
+//                mapManager.shelters.removeAll()
+//                mapManager.shelters = SqliteManager().getSheltersAll(range: 30000)
+//                print(mapManager.shelters)
             }
+            
         }
         
     }
@@ -62,16 +179,16 @@ extension MapView {
             Button {
                 mapManager.toggleSheltersList()
             } label: {
-                Text("\(Int(mapManager.mapShelter.distance))米, \(mapManager.mapShelter.category), 地下\(mapManager.mapShelter.underFloor)樓")
-                    .font(.title2)
+                Text("距約\(Int(mapManager.mapShelter.distance))米, \(mapManager.mapShelter.category), 地下\(mapManager.mapShelter.underFloor)樓")
+                    .font(.system(size: 18).bold())
                     .fontWeight(.black)
                     .foregroundColor(.primary)
-                    .frame(height: 55)
+                    .frame(height: 50)
                     .frame(maxWidth: .infinity)
                     .animation(.none, value: mapManager.mapShelter)
                     .overlay(alignment: .leading) {
                         Image(systemName: "chevron.down")
-                            .font(.headline)
+                            .font(.system(size: 19).bold())
                             .foregroundColor(.primary)
                             .padding()
                             .rotationEffect(Angle(degrees: mapManager.showShelterList ? 180 : 0))
@@ -85,6 +202,9 @@ extension MapView {
         .background(.thinMaterial)
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.3), radius: 20, x: 5, y: 5)
+        .overlay {
+            RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+        }
         
     }
     
@@ -99,16 +219,16 @@ extension MapView {
                 annotationItems: mapManager.shelters,
                 annotationContent: { shelter in
                 MapAnnotation(coordinate: shelter.coordinates) {
-                    MapAnnotationView(name: shelter.category, capacity: shelter.capacity)
-                        .scaleEffect(mapManager.mapShelter == shelter ? 1.4 : 0.8).animation(Animation.easeInOut)
-//                        .rotationEffect(Angle(degrees:  mapManager.mapShelter == shelter ? (isShakeAnimating ? 5 : -5) : 0)).animation(Animation.spring())
-                        .scaleEffect(CGSize(width: mapManager.mapShelter == shelter ? (isBreathing ? 1.08 : 1) : 1, height: mapManager.mapShelter == shelter ? (isBreathing ? 0.95 : 1) : 1), anchor: .center).animation(Animation.easeInOut(duration: 0.8))
+                    MapAnnotationView(shelter: shelter)
+                        .scaleEffect(mapManager.mapShelter == shelter ? 1.5 : 0.8).animation(Animation.easeInOut(duration: 0.2))
+                        .scaleEffect(CGSize(width: mapManager.mapShelter == shelter ? (isBreathing ? 1.09 : 1) : 1, height: mapManager.mapShelter == shelter ? (isBreathing ? 0.94 : 1) : 1), anchor: .center).animation(Animation.easeInOut(duration: 0.8))
                         .onReceive(timer) { input in
                             isBreathing.toggle()
                             isShakeAnimating.toggle()
+                            mapManager.checkCenter()
                         }
-                        .opacity(shelter.capacity == "0" ? 0 : 1)
-                        .offset(y: -8)
+//                        .opacity(shelter.capacity == "0" ? 0 : 1)
+                        .offset(y: -10)
                         .overlay(Circle()
                             .fill(Color.red.opacity(0.4))
                             .frame(width: 10, height: 10))
@@ -118,19 +238,7 @@ extension MapView {
                             }
                         }
                 }
-                
             })
-            .onAppear {
-                
-                DispatchQueue.main.async {
-                    mapManager.shelters.removeAll()
-//                    mapManager.shelters = DBManager().getNearShelters()
-                    dataManager.nearShelters.forEach { Shelter in
-                        mapManager.shelters.append(Shelter)
-                    }
-                }
-                
-            }
 
         }
     }
@@ -141,15 +249,16 @@ extension MapView {
                 
                 if mapManager.mapShelter == shelter {
                     ShelterPreview(shelter: shelter)
-                        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 5, y: 5)
                         .frame(maxWidth: .infinity)
                         .transition(.asymmetric(
                             insertion: .move(edge: .trailing),
                             removal: .move(edge: .leading)))
+                    
                 }
             }
         }
     }
+    
 }
 
 struct MapView_Previews: PreviewProvider {

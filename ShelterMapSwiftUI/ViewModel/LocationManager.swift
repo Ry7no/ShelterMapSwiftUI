@@ -53,6 +53,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         pastUserPosition = userPosition
         userPosition = locationValue
         
+        UserDefaults.standard.set(userPosition.latitude, forKey: "userCurrentPositionLAT")
+        UserDefaults.standard.set(userPosition.longitude, forKey: "userCurrentPastPositionLON")
+        UserDefaults.standard.set(pastUserPosition.latitude, forKey: "userPastPositionLAT")
+        UserDefaults.standard.set(pastUserPosition.longitude, forKey: "userPastPositionLON")
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -91,4 +95,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
+}
+
+extension Double {
+    func round(to places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }

@@ -3,15 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD79A90C28AAAEA700186964 /* all.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FD79A90B28AAAEA700186964 /* all.sqlite */; };
+		FD79A90E28AB356600186964 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79A90D28AB356600186964 /* LaunchScreenManager.swift */; };
+		FD80F22328A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */; };
 		FDC74DB3289CD51300BA9BD0 /* SheltersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */; };
 		FDD19B04289FA8F700D04373 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = FDD19B03289FA8F700D04373 /* SQLite */; };
 		FDD19B0F28A22F7000D04373 /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B0E28A22F7000D04373 /* SqliteManager.swift */; };
 		FDD19B2828A4E91A00D04373 /* SliderAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */; };
-		FDD19B3828A5641C00D04373 /* all.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD19B3728A5641C00D04373 /* all.sqlite */; };
+		FDD19B3F28A8A91300D04373 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FDD19B3E28A8A91300D04373 /* Lottie */; };
+		FDD19B4128A8A95900D04373 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B4028A8A95900D04373 /* LottieView.swift */; };
+		FDD19B4828A8AE7400D04373 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B4728A8AE7400D04373 /* LaunchScreenView.swift */; };
 		FDFB0997289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */; };
 		FDFB0999289B7AA800FDF491 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB0998289B7AA800FDF491 /* ContentView.swift */; };
 		FDFB099B289B7AA900FDF491 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDFB099A289B7AA900FDF491 /* Assets.xcassets */; };
@@ -25,11 +30,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD79A90B28AAAEA700186964 /* all.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = all.sqlite; sourceTree = "<group>"; };
+		FD79A90D28AB356600186964 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
+		FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MyFlyLocationMutatable.gpx; sourceTree = "<group>"; };
 		FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheltersListView.swift; sourceTree = "<group>"; };
 		FDD19B0A28A1FD7800D04373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FDD19B0E28A22F7000D04373 /* SqliteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
 		FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderAlertView.swift; sourceTree = "<group>"; };
-		FDD19B3728A5641C00D04373 /* all.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = all.sqlite; sourceTree = "<group>"; };
+		FDD19B4028A8A95900D04373 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		FDD19B4728A8AE7400D04373 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		FDFB0993289B7AA800FDF491 /* ShelterMapSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShelterMapSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterMapSwiftUIApp.swift; sourceTree = "<group>"; };
 		FDFB0998289B7AA800FDF491 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,15 +58,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDD19B04289FA8F700D04373 /* SQLite in Frameworks */,
+				FDD19B3F28A8A91300D04373 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FDD19B4228A8A98A00D04373 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FDD19B4028A8A95900D04373 /* LottieView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		FDFB098A289B7AA800FDF491 = {
 			isa = PBXGroup;
 			children = (
+				FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */,
 				FDFB0995289B7AA800FDF491 /* ShelterMapSwiftUI */,
 				FDFB0994289B7AA800FDF491 /* Products */,
 			);
@@ -75,10 +94,11 @@
 			isa = PBXGroup;
 			children = (
 				FDD19B0A28A1FD7800D04373 /* Info.plist */,
-				FDD19B3728A5641C00D04373 /* all.sqlite */,
+				FD79A90B28AAAEA700186964 /* all.sqlite */,
 				FDFB09A6289B7AF800FDF491 /* Model */,
 				FDFB09A5289B7AF000FDF491 /* ViewModel */,
 				FDFB09A4289B7AE600FDF491 /* View */,
+				FDD19B4228A8A98A00D04373 /* Extension */,
 				FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */,
 				FDFB0998289B7AA800FDF491 /* ContentView.swift */,
 				FDFB099A289B7AA900FDF491 /* Assets.xcassets */,
@@ -98,6 +118,7 @@
 		FDFB09A4289B7AE600FDF491 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FDD19B4728A8AE7400D04373 /* LaunchScreenView.swift */,
 				FDFB09A9289B7B4F00FDF491 /* MapView.swift */,
 				FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */,
 				FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */,
@@ -113,6 +134,7 @@
 				FDFB09A7289B7B0B00FDF491 /* LocationManager.swift */,
 				FDFB09B4289CA6D400FDF491 /* MapManager.swift */,
 				FDD19B0E28A22F7000D04373 /* SqliteManager.swift */,
+				FD79A90D28AB356600186964 /* LaunchScreenManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -143,6 +165,7 @@
 			name = ShelterMapSwiftUI;
 			packageProductDependencies = (
 				FDD19B03289FA8F700D04373 /* SQLite */,
+				FDD19B3E28A8A91300D04373 /* Lottie */,
 			);
 			productName = ShelterMapSwiftUI;
 			productReference = FDFB0993289B7AA800FDF491 /* ShelterMapSwiftUI.app */;
@@ -164,7 +187,7 @@
 				};
 			};
 			buildConfigurationList = FDFB098E289B7AA800FDF491 /* Build configuration list for PBXProject "ShelterMapSwiftUI" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -174,6 +197,7 @@
 			mainGroup = FDFB098A289B7AA800FDF491;
 			packageReferences = (
 				FDD19B02289FA8F700D04373 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				FDD19B3D28A8A91300D04373 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = FDFB0994289B7AA800FDF491 /* Products */;
 			projectDirPath = "";
@@ -189,9 +213,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD80F22328A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx in Resources */,
 				FDFB099E289B7AA900FDF491 /* Preview Assets.xcassets in Resources */,
-				FDD19B3828A5641C00D04373 /* all.sqlite in Resources */,
 				FDFB099B289B7AA900FDF491 /* Assets.xcassets in Resources */,
+				FD79A90C28AAAEA700186964 /* all.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,11 +229,14 @@
 			files = (
 				FDFB09AE289B9B5E00FDF491 /* Shelter.swift in Sources */,
 				FDC74DB3289CD51300BA9BD0 /* SheltersListView.swift in Sources */,
+				FD79A90E28AB356600186964 /* LaunchScreenManager.swift in Sources */,
 				FDD19B0F28A22F7000D04373 /* SqliteManager.swift in Sources */,
 				FDFB0999289B7AA800FDF491 /* ContentView.swift in Sources */,
+				FDD19B4828A8AE7400D04373 /* LaunchScreenView.swift in Sources */,
 				FDD19B2828A4E91A00D04373 /* SliderAlertView.swift in Sources */,
 				FDFB09AA289B7B4F00FDF491 /* MapView.swift in Sources */,
 				FDFB09B7289CC07A00FDF491 /* ShelterPreview.swift in Sources */,
+				FDD19B4128A8A95900D04373 /* LottieView.swift in Sources */,
 				FDFB09B5289CA6D400FDF491 /* MapManager.swift in Sources */,
 				FDFB0997289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift in Sources */,
 				FDFB09A8289B7B0B00FDF491 /* LocationManager.swift in Sources */,
@@ -339,14 +367,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"ShelterMapSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 48394HVWDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShelterMapSwiftUI/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
+				INFOPLIST_KEY_CFBundleDisplayName = "避難地圖";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空避難設施，是否允許此App獲取您的定位？";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空避難設施，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,7 +387,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -372,14 +402,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"ShelterMapSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 48394HVWDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShelterMapSwiftUI/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空設施資訊，是否允許此App獲取您的定位？";
+				INFOPLIST_KEY_CFBundleDisplayName = "避難地圖";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要定位權限來取得周邊防空避難設施，是否允許此App獲取您的定位？";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要定位權限來取得周邊防空避難設施，是否允許此App獲取您的定位？";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -390,7 +422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -431,6 +463,14 @@
 				minimumVersion = 0.9.2;
 			};
 		};
+		FDD19B3D28A8A91300D04373 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -438,6 +478,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FDD19B02289FA8F700D04373 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
+		};
+		FDD19B3E28A8A91300D04373 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDD19B3D28A8A91300D04373 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

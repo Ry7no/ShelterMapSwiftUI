@@ -11,7 +11,6 @@ import MapKit
 struct MapView: View {
     
     @EnvironmentObject private var locationManager: LocationManager
-//    @EnvironmentObject private var dataManager: DataManager
     @EnvironmentObject private var mapManager: MapManager
     @EnvironmentObject private var sqliteManager: SqliteManager
 
@@ -20,14 +19,13 @@ struct MapView: View {
     @State var tracking: MapUserTrackingMode = .none
     @State var isExtending: Bool = false
     
-    private let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
     @State private var isBreathing: Bool = false
-    @State private var isShakeAnimating: Bool = false
-    @State private var isShowingAlert = false
-    @State private var isUserCenter = false
+    @State private var isShowingAlert: Bool = false
+    @State private var isUserCenter: Bool = false
     
-    @State var shelters: [Shelter] = []
-    @State var distance: Double = 0.0
+    @State var searchingTimeRemaining = 10
+    @State var showingSearchAlert = false
     
     var body: some View {
 
@@ -35,11 +33,81 @@ struct MapView: View {
             
             mapLayer
                 .ignoresSafeArea()
+
+            if let mapShelters = mapManager.shelters {
             
-            if mapManager.shelters.isEmpty {
-                ProgressView()
-                    .tint(.red)
-                    .scaleEffect(x: 2, y: 2, anchor: .center)
+                if mapShelters.isEmpty || sqliteManager.shelters.isEmpty {
+                
+                    ZStack(alignment: .bottomTrailing) {
+                        
+                        ProgressView()
+                            .padding(.horizontal, 47)
+                            .padding(.vertical, 55)
+                            .tint(scheme == .dark ? .white : .black)
+                            .scaleEffect(x: 2, y: 2, anchor: .center)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 3).foregroundColor(scheme == .dark ? .white : .black)
+                            }
+                            .onReceive(mapManager.timer) { input in
+                                if locationManager.userPosition.latitude == 24.140793 {
+                                    searchingTimeRemaining = 10
+                                } else {
+                                    
+                                    if searchingTimeRemaining > 0 {
+                                        print("@countdown")
+                                        searchingTimeRemaining -= 1
+                                    } else if searchingTimeRemaining == 0 {
+                                        showingSearchAlert = true
+                                    }
+                                    
+                                }
+                               
+                            }
+                            .onAppear {
+                                isExtending = false
+                            }
+
+                        Text("\(searchingTimeRemaining)")
+                            .font(.system(size: 12))
+                            .padding(9)
+                            .opacity(searchingTimeRemaining == 0 ? 0 : 1)
+        
+                    }
+//                    .opacity(searchingTimeRemaining > 10 ? 0 : 1)
+                    .alert("附近搜尋不到相關避難設施", isPresented: $showingSearchAlert, actions: {
+                        Button("重新搜尋") {
+                            searchingTimeRemaining = 10
+                            showingSearchAlert = false
+                            sqliteManager.shelters.removeAll()
+                            mapManager.shelters.removeAll()
+                            DispatchQueue.main.async {
+                                sqliteManager.getSheltersAll(range: sqliteManager.radius)
+                                mapManager.shelters = sqliteManager.shelters
+                                mapManager.mapShelter = Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
+                                withAnimation {
+                                    mapManager.mapRegion.center = self.locationManager.userPosition
+                                    mapManager.mapRegion.span = MKCoordinateSpan(latitudeDelta: Double(sqliteManager.radius / 55000), longitudeDelta: Double(sqliteManager.radius / 55000))
+                                }
+                            }
+                        }
+
+                        Button("調整範圍"){
+                            withAnimation {
+                                showingSearchAlert = false
+                                searchingTimeRemaining = 15
+                                self.isShowingAlert.toggle()
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                                    searchingTimeRemaining = 10
+//                                }
+                            }
+                        }
+                    }, message: {
+                        Text("\n請調整搜尋半徑重新搜尋")
+                    })
+
+                
             } else {
                 VStack(alignment: .center) {
                     header
@@ -49,7 +117,7 @@ struct MapView: View {
                     
                     HStack {
                         
-                        HStack(spacing: 25) {
+                        HStack(spacing: (UIScreen.main.bounds.width - 280) / 4 ) {
                             
                             Button {
                                 
@@ -77,7 +145,7 @@ struct MapView: View {
 
                             }
                             
-                            HStack(spacing: 25) {
+                            HStack(spacing: (UIScreen.main.bounds.width - 280) / 4) {
                                 
                                 Button {
                                     mapManager.resetCamera()
@@ -107,10 +175,45 @@ struct MapView: View {
                                 } label: {
                                     Image(systemName: "barometer")
                                         .font(.system(size: 18).bold())
+                                        .rotationEffect(Angle(degrees: isShowingAlert ? 360 : 0))
+                                        .scaleEffect(isShowingAlert ? 1.25 : 1)
                                         .scaledToFit()
                                         .foregroundColor(scheme == .dark ? .white : .black)
                                         .padding()
-//                                        .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
+                                        .background(content: {
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .fill(.thinMaterial)
+                                        })
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
+                                        }
+                                }
+                                
+                                Button {
+
+                                    sqliteManager.shelters.removeAll()
+                                    mapManager.shelters.removeAll()
+                                    DispatchQueue.main.async {
+                                        sqliteManager.getSheltersAll(range: sqliteManager.radius)
+                                        mapManager.shelters = sqliteManager.shelters
+                                        mapManager.mapShelter = Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
+                                        withAnimation {
+                                            mapManager.mapRegion.center = self.locationManager.userPosition
+                                            mapManager.mapRegion.span = MKCoordinateSpan(latitudeDelta: Double(sqliteManager.radius / 55000), longitudeDelta: Double(sqliteManager.radius / 55000))
+                                        }
+                                    }
+                                    
+                                    self.isExtending = false
+                                    
+                                } label: {
+                                    Image(systemName: "arrow.triangle.2.circlepath")
+                                        .font(.system(size: 15).bold())
+                                        .rotationEffect(Angle(degrees: 90))
+                                        .scaledToFit()
+                                        .foregroundColor(scheme == .dark ? .white : .black)
+                                        .padding()
                                         .background(content: {
                                             RoundedRectangle(cornerRadius: 8)
                                                 .fill(.thinMaterial)
@@ -135,7 +238,6 @@ struct MapView: View {
                                 .scaledToFit()
                                 .foregroundColor(scheme == .dark ? .white : .black)
                                 .padding()
-//                                .background(scheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1))
                                 .background(content: {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(.ultraThinMaterial)
@@ -146,6 +248,7 @@ struct MapView: View {
                                     RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
                                 }
                         }
+                        .opacity(mapManager.mapShelter.category == "請下拉選擇或點擊圖標" ? 0 : 1)
                     }
                     .padding(.horizontal, 30)
                     .padding(.bottom, 30)
@@ -156,14 +259,22 @@ struct MapView: View {
 
                 }
             }
-
+            }
         }
         .sliderAlert(isShowing: $isShowingAlert)
         .onAppear {
             DispatchQueue.main.async {
-//                mapManager.shelters.removeAll()
-//                mapManager.shelters = SqliteManager().getSheltersAll(range: 30000)
-//                print(mapManager.shelters)
+                if sqliteManager.shelters.isEmpty {
+                    DispatchQueue.main.async {
+                        sqliteManager.getSheltersAll(range: sqliteManager.radius)
+                        mapManager.shelters = sqliteManager.shelters
+                        mapManager.mapShelter = Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
+                        withAnimation {
+                            mapManager.mapRegion.center = self.locationManager.userPosition
+                            mapManager.mapRegion.span = MKCoordinateSpan(latitudeDelta: Double(sqliteManager.radius / 55000), longitudeDelta: Double(sqliteManager.radius / 55000))
+                        }
+                    }
+                }
             }
             
         }
@@ -174,38 +285,52 @@ struct MapView: View {
 extension MapView {
     
     private var header: some View {
-        
-        VStack {
-            Button {
-                mapManager.toggleSheltersList()
-            } label: {
-                Text("距約\(Int(mapManager.mapShelter.distance))米, \(mapManager.mapShelter.category), 地下\(mapManager.mapShelter.underFloor)樓")
-                    .font(.system(size: 18).bold())
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .frame(height: 50)
-                    .frame(maxWidth: .infinity)
-                    .animation(.none, value: mapManager.mapShelter)
-                    .overlay(alignment: .leading) {
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 19).bold())
-                            .foregroundColor(.primary)
-                            .padding()
-                            .rotationEffect(Angle(degrees: mapManager.showShelterList ? 180 : 0))
-                    }
+            
+            VStack {
+                
+                Button {
+                    mapManager.toggleSheltersList()
+                } label: {
+                    Text(mapManager.mapShelter.category == "請下拉選擇或點擊圖標" ? "\(mapManager.mapShelter.category)" : "距約\(Int(mapManager.mapShelter.distance))米, \(mapManager.mapShelter.category), 地下\(mapManager.mapShelter.underFloor)樓")
+                        .font(.system(size: 18).bold())
+                        .fontWeight(.black)
+                        .foregroundColor(.primary)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .animation(.none, value: mapManager.mapShelter)
+                        .overlay(alignment: .leading) {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 19).bold())
+                                .foregroundColor(.primary)
+                                .padding()
+                                .rotationEffect(Angle(degrees: mapManager.showShelterList ? 180 : 0))
+                        }
+                        .overlay(alignment: .trailing) {
+                            VStack {
+                                Text("\(mapManager.shelters.count)")
+                                    .font(.system(size: 10).bold())
+                                    .padding(6)
+                                    .foregroundColor(scheme == .dark ? .white : .black)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 6).stroke(lineWidth: 1.5).foregroundColor(scheme == .dark ? .white : .black).opacity(mapManager.showShelterList ? 0 : 1)
+                                    }
+                                    .scaleEffect(mapManager.showShelterList ? 1.5 : 1)
+                            }
+                            .padding(.trailing, 12)
+                        }
+                }
+                
+                if mapManager.showShelterList {
+                    SheltersListView()
+                }
             }
-
-            if mapManager.showShelterList {
-                SheltersListView()
+            .background(.thinMaterial)
+            .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.3), radius: 20, x: 5, y: 5)
+            .overlay {
+                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
             }
-        }
-        .background(.thinMaterial)
-        .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 5, y: 5)
-        .overlay {
-            RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2).foregroundColor(scheme == .dark ? .white : .black)
-        }
-        
+            
     }
     
     private var mapLayer: some View {
@@ -224,7 +349,6 @@ extension MapView {
                         .scaleEffect(CGSize(width: mapManager.mapShelter == shelter ? (isBreathing ? 1.09 : 1) : 1, height: mapManager.mapShelter == shelter ? (isBreathing ? 0.94 : 1) : 1), anchor: .center).animation(Animation.easeInOut(duration: 0.8))
                         .onReceive(timer) { input in
                             isBreathing.toggle()
-                            isShakeAnimating.toggle()
                             mapManager.checkCenter()
                         }
 //                        .opacity(shelter.capacity == "0" ? 0 : 1)

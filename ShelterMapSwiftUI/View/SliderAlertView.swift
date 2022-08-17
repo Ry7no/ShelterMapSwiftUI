@@ -29,10 +29,12 @@ struct SliderAlertView<Presenting>: View where Presenting: View {
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-                .background(Rectangle().fill(.thinMaterial.opacity(0.85)).blur(radius: 3)
+                .background(Rectangle().fill(.ultraThinMaterial)
                     .onTapGesture {
-                    isShowing.toggle()
+                        withAnimation {
+                            isShowing.toggle()
+                        }
+                    
                 })
                 .opacity(self.isShowing ? 1 : 0)
                 .ignoresSafeArea()
@@ -63,7 +65,9 @@ struct SliderAlertView<Presenting>: View where Presenting: View {
                             DispatchQueue.main.async {
                                 sqliteManager.getSheltersAll(range: sqliteManager.radius)
                                 mapManager.shelters = sqliteManager.shelters
+                                mapManager.mapShelter = Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
                                 withAnimation {
+                                    
                                     mapManager.mapRegion.center = self.locationManager.userPosition
                                     mapManager.mapRegion.span = MKCoordinateSpan(latitudeDelta: Double(sqliteManager.radius / 55000), longitudeDelta: Double(sqliteManager.radius / 55000))
                                 }
@@ -81,7 +85,9 @@ struct SliderAlertView<Presenting>: View where Presenting: View {
                         .controlSize(.regular)
                         
                         Button {
-                            isShowing.toggle()
+                            withAnimation {
+                                isShowing.toggle()
+                            }
                         } label: {
                             Text("取消")
                                 .font(.system(size: 16).bold())

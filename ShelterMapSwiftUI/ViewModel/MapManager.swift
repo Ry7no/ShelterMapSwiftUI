@@ -23,22 +23,23 @@ class MapManager: ObservableObject {
     
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
     let shelterSpan = MKCoordinateSpan(latitudeDelta: 0.0008, longitudeDelta: 0.0008)
-    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     @Published var showShelterList: Bool = false
     
     @Published var sheetShelter: Shelter? = nil
     @Published var isCenter = false
     
     init() {
-        
-        var shelters = SqliteManager().shelters
+
+        let shelters = SqliteManager().shelters
         
         print("@init shelters array")
-
-        print(shelters.count)
+        print("@shelters.count: \(shelters.count)")
+        
         self.shelters = shelters
 
-        self.mapShelter = shelters.first ?? Shelter(category: "", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
+        self.mapShelter = shelters.first ?? Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
 
         DispatchQueue.main.async {
             withAnimation {
@@ -62,7 +63,7 @@ class MapManager: ObservableObject {
                 center: shelter.coordinates,
                 span: shelterSpan)
         }
-        print("\(mapShelter.category) ?? \(shelter.category)")
+//        print("\(mapShelter.category) ?? \(shelter.category)")
     }
     
     func toggleSheltersList() {

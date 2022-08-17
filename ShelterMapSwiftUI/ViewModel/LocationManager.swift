@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 import SwiftUI
+import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
@@ -18,6 +19,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
     
+    static let shared = LocationManager()
+    
     override init() {
         super.init()
         
@@ -27,6 +30,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         getLocation()
 
+    }
+    
+    func requestUserLocation() {
+        manager.requestWhenInUseAuthorization()
     }
         
     func getLocation() {

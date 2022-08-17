@@ -11,17 +11,51 @@ import SwiftUI
 struct ShelterMapSwiftUIApp: App {
     
     @StateObject private var locationManager = LocationManager()
-    @StateObject private var mapManager = MapManager()
-    @StateObject private var sqliteManager = SqliteManager()
-    
+    @StateObject var launchScreenManager = LaunchScreenManager()
+
     var body: some Scene {
+
         WindowGroup {
-            ContentView()
-                .environmentObject(locationManager)
-                .environmentObject(mapManager)
-                .environmentObject(sqliteManager)
+            
+            ZStack{
+
+                if locationManager.userPosition.latitude == 24.140793 {
+                    
+                    LaunchScreenView()
+                    
+                } else {
+                    
+                    ContentView()
+                        .environmentObject(locationManager)
+                        .onAppear {
+                            LocationManager.shared.requestUserLocation()
+                        }
+                    
+                }
                 
+
+                if launchScreenManager.state != .completed {
+                    LaunchScreenView()
+                }
                 
+            }
+            .environmentObject(launchScreenManager)
         }
+        
+//        WindowGroup {
+//
+//            if locationManager.userPosition.latitude == 24.140793 {
+//                
+//                LaunchScreenView()
+//                
+//            } else {
+//                
+//                ContentView()
+//                    .environmentObject(locationManager)
+//                    .onAppear {
+//                        LocationManager.shared.requestUserLocation()
+//                    }
+//            }
+//        }
     }
 }

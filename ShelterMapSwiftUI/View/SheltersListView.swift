@@ -11,6 +11,7 @@ struct SheltersListView: View {
     
 //    @ObservedObject var mapManager = MapManager()
     @EnvironmentObject private var mapManager: MapManager
+    @Environment(\.colorScheme) var scheme
     
     private var annotationColorDigits2 = Color("Red1")
     private var annotationColorDigits3 = Color("Red2")
@@ -28,9 +29,10 @@ struct SheltersListView: View {
                     mapManager.showNextShelter(shelter: shelter)
                 } label: {
                     listRowView(shelter: shelter)
+                        
                 }
                 .padding(.vertical, 4)
-                .listRowBackground(Color.clear)
+                .listRowBackground(mapManager.mapShelter == shelter ? Color("Red1").opacity(scheme == .dark ? 0.5 : 0.3) : Color.clear)
                 
             }
         }
@@ -46,7 +48,7 @@ extension SheltersListView {
             HStack {
                 Spacer(minLength: 0.5)
                 Text("\(Int(shelter.distance))")
-                    .font(.system(size: 14).bold())
+                    .font(.system(size: 13.5).bold())
                     .foregroundColor(.white)
                 Spacer(minLength: 3)
                 Text("m")
@@ -54,7 +56,7 @@ extension SheltersListView {
                     .foregroundColor(.white)
             }
             .padding(.horizontal, 5)
-            .frame(width: Int(shelter.distance) > 99 ? 55 : 45, height: 45, alignment: .trailing)
+            .frame(width: Int(shelter.distance) > 99 ? 55 : 46, height: 46, alignment: .trailing)
             .background(Int(shelter.capacity)! < 99 ? annotationColorDigits2 : (Int(shelter.capacity)! > 999 ? annotationColorDigits4 : annotationColorDigits3))
             .cornerRadius(10)
 
@@ -65,7 +67,7 @@ extension SheltersListView {
 
                     Text("[ 可容納\(shelter.capacity)人 ]")
                         .font(.system(size: 11).bold())
-                        .foregroundColor(.gray)
+                        .foregroundColor(mapManager.mapShelter == shelter ? .white.opacity(scheme == .dark ? 0.8 : 1) : .gray)
                 }
                 .padding(.bottom, 0.5)
                 
@@ -73,6 +75,7 @@ extension SheltersListView {
                     .font(.system(size: 12))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            
         }
     }
 }

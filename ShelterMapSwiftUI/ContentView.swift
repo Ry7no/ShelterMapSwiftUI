@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var locationManager = LocationManager()
+    @StateObject private var mapManager = MapManager()
+    @StateObject private var sqliteManager = SqliteManager()
+    @EnvironmentObject var launchScreenManager: LaunchScreenManager
+    
     var body: some View {
-        MapView()  
+        
+        MapView()
+            .environmentObject(sqliteManager)
+            .environmentObject(mapManager)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                    withAnimation(.easeInOut) {
+                        launchScreenManager.dismiss()
+                    }
+                }
+            }
+        
     }
 }
 

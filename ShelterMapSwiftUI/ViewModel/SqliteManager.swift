@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//import SwiftUI
+import SwiftUI
 import SQLite
 import CoreLocation
 
@@ -27,10 +27,15 @@ class SqliteManager: ObservableObject {
     private var distance: Expression<Double>!
     
     @Published var shelters: [Shelter] = []
-    @Published var radius: CGFloat = 100
+    @Published var radius: CGFloat = 200
+    
     var count = 0
     
     init() {
+        
+        DispatchQueue.main.async {
+            LocationManager().requestUserLocation()
+        }
         
         do {
             
@@ -50,14 +55,16 @@ class SqliteManager: ObservableObject {
             office = Expression<String>("office")
             
         } catch {
-            print(error.localizedDescription)
+            print("error: \(error.localizedDescription)")
         }
         
-        self.getSheltersAll(range: radius)
+//        self.getSheltersAll(range: radius)
         
-        if shelters.isEmpty {
-            self.getSheltersAll(range: radius + 200)
-        }
+//        if shelters.isEmpty {
+//            radius = radius + 200
+//            self.getSheltersAll(range: radius)
+//            print("@radius: \(radius)")
+//        }
     }
     
     

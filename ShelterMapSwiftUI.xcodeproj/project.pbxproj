@@ -7,9 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0315C828C388510069B516 /* GaugeDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0315C728C388510069B516 /* GaugeDemoView.swift */; };
+		FD2BF7A228C63AB80014C456 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BF7A128C63AB80014C456 /* WidgetKit.framework */; };
+		FD2BF7A428C63AB80014C456 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BF7A328C63AB80014C456 /* SwiftUI.framework */; };
+		FD2BF7A728C63AB80014C456 /* ShelterMapWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2BF7A628C63AB80014C456 /* ShelterMapWidget.swift */; };
+		FD2BF7AA28C63AB90014C456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2BF7A928C63AB90014C456 /* Assets.xcassets */; };
+		FD2BF7B028C63AB90014C456 /* ShelterMapWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FD2BF79F28C63AB80014C456 /* ShelterMapWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FD3CD91E28C6501F001656CD /* GaugeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3CD91D28C6501F001656CD /* GaugeWidgetView.swift */; };
+		FD3CD92028C711E8001656CD /* MapAnnotationViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3CD91F28C711E8001656CD /* MapAnnotationViewWidget.swift */; };
 		FD79A90C28AAAEA700186964 /* all.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FD79A90B28AAAEA700186964 /* all.sqlite */; };
 		FD79A90E28AB356600186964 /* LaunchScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79A90D28AB356600186964 /* LaunchScreenManager.swift */; };
 		FD80F22328A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */; };
+		FD8EC4E128C7838700F4E28C /* ShelterMapWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = FD8EC4E428C7838700F4E28C /* ShelterMapWidget.intentdefinition */; };
+		FD8EC4E228C7838700F4E28C /* ShelterMapWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = FD8EC4E428C7838700F4E28C /* ShelterMapWidget.intentdefinition */; };
 		FDC74DB3289CD51300BA9BD0 /* SheltersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */; };
 		FDD19B04289FA8F700D04373 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = FDD19B03289FA8F700D04373 /* SQLite */; };
 		FDD19B0F28A22F7000D04373 /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD19B0E28A22F7000D04373 /* SqliteManager.swift */; };
@@ -27,12 +37,55 @@
 		FDFB09B2289B9D0B00FDF491 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */; };
 		FDFB09B5289CA6D400FDF491 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B4289CA6D400FDF491 /* MapManager.swift */; };
 		FDFB09B7289CC07A00FDF491 /* ShelterPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */; };
+		FDFE999528CEBF8C0099FE07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDFE999428CEBF8C0099FE07 /* GoogleService-Info.plist */; };
+		FDFE999628CEBF8C0099FE07 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDFE999428CEBF8C0099FE07 /* GoogleService-Info.plist */; };
+		FDFE999928CEC1330099FE07 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDFE999828CEC1330099FE07 /* FirebaseAnalytics */; };
+		FDFE999B28CEC1330099FE07 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FDFE999A28CEC1330099FE07 /* FirebaseAnalyticsSwift */; };
+		FDFE999D28CEC1330099FE07 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDFE999C28CEC1330099FE07 /* FirebaseCrashlytics */; };
+		FDFE999F28CEC1330099FE07 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = FDFE999E28CEC1330099FE07 /* FirebasePerformance */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FD2BF7AE28C63AB90014C456 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDFB098B289B7AA800FDF491 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD2BF79E28C63AB80014C456;
+			remoteInfo = ShelterMapWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FD2BF7B428C63AB90014C456 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FD2BF7B028C63AB90014C456 /* ShelterMapWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		FD0315C728C388510069B516 /* GaugeDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeDemoView.swift; sourceTree = "<group>"; };
+		FD2BF79F28C63AB80014C456 /* ShelterMapWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShelterMapWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2BF7A128C63AB80014C456 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FD2BF7A328C63AB80014C456 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FD2BF7A628C63AB80014C456 /* ShelterMapWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterMapWidget.swift; sourceTree = "<group>"; };
+		FD2BF7A928C63AB90014C456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD2BF7AB28C63AB90014C456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD3CD91B28C64CBA001656CD /* ShelterMapSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShelterMapSwiftUI.entitlements; sourceTree = "<group>"; };
+		FD3CD91C28C64D67001656CD /* ShelterMapWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShelterMapWidgetExtension.entitlements; sourceTree = "<group>"; };
+		FD3CD91D28C6501F001656CD /* GaugeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeWidgetView.swift; sourceTree = "<group>"; };
+		FD3CD91F28C711E8001656CD /* MapAnnotationViewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationViewWidget.swift; sourceTree = "<group>"; };
 		FD79A90B28AAAEA700186964 /* all.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = all.sqlite; sourceTree = "<group>"; };
 		FD79A90D28AB356600186964 /* LaunchScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenManager.swift; sourceTree = "<group>"; };
 		FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MyFlyLocationMutatable.gpx; sourceTree = "<group>"; };
+		FD8EC4E328C7838700F4E28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/ShelterMapWidget.intentdefinition; sourceTree = "<group>"; };
+		FD8EC4E628C7838800F4E28C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShelterMapWidget.strings; sourceTree = "<group>"; };
 		FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheltersListView.swift; sourceTree = "<group>"; };
 		FDD19B0A28A1FD7800D04373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FDD19B0E28A22F7000D04373 /* SqliteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
@@ -50,21 +103,57 @@
 		FDFB09B1289B9D0B00FDF491 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		FDFB09B4289CA6D400FDF491 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterPreview.swift; sourceTree = "<group>"; };
+		FDFE999428CEBF8C0099FE07 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FD2BF79C28C63AB80014C456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD2BF7A428C63AB80014C456 /* SwiftUI.framework in Frameworks */,
+				FD2BF7A228C63AB80014C456 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDFB0990289B7AA800FDF491 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFE999B28CEC1330099FE07 /* FirebaseAnalyticsSwift in Frameworks */,
 				FDD19B04289FA8F700D04373 /* SQLite in Frameworks */,
+				FDFE999F28CEC1330099FE07 /* FirebasePerformance in Frameworks */,
+				FDFE999D28CEC1330099FE07 /* FirebaseCrashlytics in Frameworks */,
 				FDD19B3F28A8A91300D04373 /* Lottie in Frameworks */,
+				FDFE999928CEC1330099FE07 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD2BF7A028C63AB80014C456 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD2BF7A128C63AB80014C456 /* WidgetKit.framework */,
+				FD2BF7A328C63AB80014C456 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD2BF7A528C63AB80014C456 /* ShelterMapWidget */ = {
+			isa = PBXGroup;
+			children = (
+				FD2BF7A628C63AB80014C456 /* ShelterMapWidget.swift */,
+				FD3CD91D28C6501F001656CD /* GaugeWidgetView.swift */,
+				FD3CD91F28C711E8001656CD /* MapAnnotationViewWidget.swift */,
+				FD8EC4E428C7838700F4E28C /* ShelterMapWidget.intentdefinition */,
+				FD2BF7A928C63AB90014C456 /* Assets.xcassets */,
+				FD2BF7AB28C63AB90014C456 /* Info.plist */,
+			);
+			path = ShelterMapWidget;
+			sourceTree = "<group>";
+		};
 		FDD19B4228A8A98A00D04373 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +165,11 @@
 		FDFB098A289B7AA800FDF491 = {
 			isa = PBXGroup;
 			children = (
+				FD3CD91C28C64D67001656CD /* ShelterMapWidgetExtension.entitlements */,
 				FD80F22228A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx */,
 				FDFB0995289B7AA800FDF491 /* ShelterMapSwiftUI */,
+				FD2BF7A528C63AB80014C456 /* ShelterMapWidget */,
+				FD2BF7A028C63AB80014C456 /* Frameworks */,
 				FDFB0994289B7AA800FDF491 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				FDFB0993289B7AA800FDF491 /* ShelterMapSwiftUI.app */,
+				FD2BF79F28C63AB80014C456 /* ShelterMapWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +186,7 @@
 		FDFB0995289B7AA800FDF491 /* ShelterMapSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				FD3CD91B28C64CBA001656CD /* ShelterMapSwiftUI.entitlements */,
 				FDD19B0A28A1FD7800D04373 /* Info.plist */,
 				FD79A90B28AAAEA700186964 /* all.sqlite */,
 				FDFB09A6289B7AF800FDF491 /* Model */,
@@ -101,6 +195,7 @@
 				FDD19B4228A8A98A00D04373 /* Extension */,
 				FDFB0996289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift */,
 				FDFB0998289B7AA800FDF491 /* ContentView.swift */,
+				FDFE999428CEBF8C0099FE07 /* GoogleService-Info.plist */,
 				FDFB099A289B7AA900FDF491 /* Assets.xcassets */,
 				FDFB099C289B7AA900FDF491 /* Preview Content */,
 			);
@@ -124,6 +219,7 @@
 				FDFB09B6289CC07A00FDF491 /* ShelterPreview.swift */,
 				FDC74DB2289CD51300BA9BD0 /* SheltersListView.swift */,
 				FDD19B2728A4E91A00D04373 /* SliderAlertView.swift */,
+				FD0315C728C388510069B516 /* GaugeDemoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,6 +246,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FD2BF79E28C63AB80014C456 /* ShelterMapWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD2BF7B128C63AB90014C456 /* Build configuration list for PBXNativeTarget "ShelterMapWidgetExtension" */;
+			buildPhases = (
+				FD2BF79B28C63AB80014C456 /* Sources */,
+				FD2BF79C28C63AB80014C456 /* Frameworks */,
+				FD2BF79D28C63AB80014C456 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShelterMapWidgetExtension;
+			productName = ShelterMapWidgetExtension;
+			productReference = FD2BF79F28C63AB80014C456 /* ShelterMapWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FDFB0992289B7AA800FDF491 /* ShelterMapSwiftUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDFB09A1289B7AA900FDF491 /* Build configuration list for PBXNativeTarget "ShelterMapSwiftUI" */;
@@ -157,15 +270,22 @@
 				FDFB098F289B7AA800FDF491 /* Sources */,
 				FDFB0990289B7AA800FDF491 /* Frameworks */,
 				FDFB0991289B7AA800FDF491 /* Resources */,
+				FD2BF7B428C63AB90014C456 /* Embed Foundation Extensions */,
+				FDFE99A028CEC18F0099FE07 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FD2BF7AF28C63AB90014C456 /* PBXTargetDependency */,
 			);
 			name = ShelterMapSwiftUI;
 			packageProductDependencies = (
 				FDD19B03289FA8F700D04373 /* SQLite */,
 				FDD19B3E28A8A91300D04373 /* Lottie */,
+				FDFE999828CEC1330099FE07 /* FirebaseAnalytics */,
+				FDFE999A28CEC1330099FE07 /* FirebaseAnalyticsSwift */,
+				FDFE999C28CEC1330099FE07 /* FirebaseCrashlytics */,
+				FDFE999E28CEC1330099FE07 /* FirebasePerformance */,
 			);
 			productName = ShelterMapSwiftUI;
 			productReference = FDFB0993289B7AA800FDF491 /* ShelterMapSwiftUI.app */;
@@ -181,6 +301,9 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					FD2BF79E28C63AB80014C456 = {
+						CreatedOnToolsVersion = 14.0;
+					};
 					FDFB0992289B7AA800FDF491 = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -198,17 +321,28 @@
 			packageReferences = (
 				FDD19B02289FA8F700D04373 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				FDD19B3D28A8A91300D04373 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = FDFB0994289B7AA800FDF491 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				FDFB0992289B7AA800FDF491 /* ShelterMapSwiftUI */,
+				FD2BF79E28C63AB80014C456 /* ShelterMapWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FD2BF79D28C63AB80014C456 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDFE999628CEBF8C0099FE07 /* GoogleService-Info.plist in Resources */,
+				FD2BF7AA28C63AB90014C456 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDFB0991289B7AA800FDF491 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,13 +350,47 @@
 				FD80F22328A8DD6B00EB6170 /* MyFlyLocationMutatable.gpx in Resources */,
 				FDFB099E289B7AA900FDF491 /* Preview Assets.xcassets in Resources */,
 				FDFB099B289B7AA900FDF491 /* Assets.xcassets in Resources */,
+				FDFE999528CEBF8C0099FE07 /* GoogleService-Info.plist in Resources */,
 				FD79A90C28AAAEA700186964 /* all.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FDFE99A028CEC18F0099FE07 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		FD2BF79B28C63AB80014C456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD3CD92028C711E8001656CD /* MapAnnotationViewWidget.swift in Sources */,
+				FD2BF7A728C63AB80014C456 /* ShelterMapWidget.swift in Sources */,
+				FD8EC4E228C7838700F4E28C /* ShelterMapWidget.intentdefinition in Sources */,
+				FD3CD91E28C6501F001656CD /* GaugeWidgetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDFB098F289B7AA800FDF491 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,17 +404,99 @@
 				FDD19B2828A4E91A00D04373 /* SliderAlertView.swift in Sources */,
 				FDFB09AA289B7B4F00FDF491 /* MapView.swift in Sources */,
 				FDFB09B7289CC07A00FDF491 /* ShelterPreview.swift in Sources */,
+				FD8EC4E128C7838700F4E28C /* ShelterMapWidget.intentdefinition in Sources */,
 				FDD19B4128A8A95900D04373 /* LottieView.swift in Sources */,
 				FDFB09B5289CA6D400FDF491 /* MapManager.swift in Sources */,
 				FDFB0997289B7AA800FDF491 /* ShelterMapSwiftUIApp.swift in Sources */,
 				FDFB09A8289B7B0B00FDF491 /* LocationManager.swift in Sources */,
+				FD0315C828C388510069B516 /* GaugeDemoView.swift in Sources */,
 				FDFB09B2289B9D0B00FDF491 /* MapAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		FD2BF7AF28C63AB90014C456 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD2BF79E28C63AB80014C456 /* ShelterMapWidgetExtension */;
+			targetProxy = FD2BF7AE28C63AB90014C456 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FD8EC4E428C7838700F4E28C /* ShelterMapWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD8EC4E328C7838700F4E28C /* Base */,
+				FD8EC4E628C7838800F4E28C /* en */,
+			);
+			name = ShelterMapWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		FD2BF7B228C63AB90014C456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ShelterMapWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 48394HVWDA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShelterMapWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "避難地圖";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI.ShelterMapWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FD2BF7B328C63AB90014C456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ShelterMapWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 48394HVWDA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShelterMapWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "避難地圖";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI.ShelterMapWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FDFB099F289B7AA900FDF491 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -297,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -351,7 +601,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -364,11 +614,14 @@
 		FDFB09A2289B7AA900FDF491 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShelterMapSwiftUI/ShelterMapSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"ShelterMapSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 48394HVWDA;
 				ENABLE_PREVIEWS = YES;
@@ -387,7 +640,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -399,10 +652,12 @@
 		FDFB09A3289B7AA900FDF491 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShelterMapSwiftUI/ShelterMapSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"ShelterMapSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 48394HVWDA;
@@ -422,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.novachen.ShelterMapSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -434,6 +689,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FD2BF7B128C63AB90014C456 /* Build configuration list for PBXNativeTarget "ShelterMapWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD2BF7B228C63AB90014C456 /* Debug */,
+				FD2BF7B328C63AB90014C456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FDFB098E289B7AA800FDF491 /* Build configuration list for PBXProject "ShelterMapSwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -471,6 +735,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -483,6 +755,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FDD19B3D28A8A91300D04373 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		FDFE999828CEC1330099FE07 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FDFE999A28CEC1330099FE07 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		FDFE999C28CEC1330099FE07 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		FDFE999E28CEC1330099FE07 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FDFE999728CEC1330099FE07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

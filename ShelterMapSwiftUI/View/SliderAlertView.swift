@@ -67,7 +67,6 @@ struct SliderAlertView<Presenting>: View where Presenting: View {
                                 mapManager.shelters = sqliteManager.shelters
                                 mapManager.mapShelter = Shelter(category: "請下拉選擇或點擊圖標", code: "", village: "", address: "", latitude: 0.0, longitude: 0.0, underFloor: "", capacity: "", office: "")
                                 withAnimation {
-                                    
                                     mapManager.mapRegion.center = self.locationManager.userPosition
                                     mapManager.mapRegion.span = MKCoordinateSpan(latitudeDelta: Double(sqliteManager.radius / 55000), longitudeDelta: Double(sqliteManager.radius / 55000))
                                 }

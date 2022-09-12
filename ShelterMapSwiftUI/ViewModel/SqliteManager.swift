@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import SQLite
 import CoreLocation
-
+import WidgetKit
 
 class SqliteManager: ObservableObject {
     
@@ -40,7 +40,7 @@ class SqliteManager: ObservableObject {
         do {
             
             let allDataPath = Bundle.main.path(forResource: "all", ofType: "sqlite")
-            print(allDataPath)
+            print("\(String(describing: allDataPath))")
             db = try Connection(allDataPath!, readonly: true)
             
             all = Table("all")
@@ -104,6 +104,26 @@ class SqliteManager: ObservableObject {
         }
         
         self.shelters = self.shelters.sorted(by: { $0.distance < $1.distance })
+        
+        if shelters.count > 0 {
+            
+            let nearestCategory = shelters[0].category
+            let nearestAddress = shelters[0].address
+            let nearestUnderFloor = shelters[0].underFloor
+            let nearestCapacity = shelters[0].capacity
+            let nearestDistance = Int(shelters[0].distance)
+            let totalCount = shelters.count
+            
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(nearestCategory, forKey: "nearestCategory")
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(nearestAddress, forKey: "nearestAddress")
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(nearestUnderFloor, forKey: "nearestUnderFloor")
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(nearestCapacity, forKey: "nearestCapacity")
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(nearestDistance, forKey: "nearestDistance")
+            UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(totalCount, forKey: "totalCount")
+            
+        }
+        
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     

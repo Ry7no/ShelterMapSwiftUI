@@ -38,3 +38,17 @@ struct LottieView: UIViewRepresentable {
     }
 
 }
+
+extension Double {
+    func rounding(toDecimal decimal: Int) -> Double {
+        let numberOfDigits = pow(10.0, Double(decimal))
+        return (self * numberOfDigits).rounded(.toNearestOrAwayFromZero) / numberOfDigits
+    }
+    
+    func string(fractionDigits:Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = fractionDigits
+        formatter.maximumFractionDigits = fractionDigits
+        return formatter.string(from: self as NSNumber) ?? "\(self)"
+    }
+}

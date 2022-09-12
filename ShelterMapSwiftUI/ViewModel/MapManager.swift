@@ -50,11 +50,15 @@ class MapManager: ObservableObject {
     }
     
     func checkCenter() {
-        if mapRegion.center.latitude.round(to: 4) == self.locationManager.userPosition.latitude.round(to: 4) {
-            self.isCenter = true
-        } else {
-            self.isCenter = false
+        
+        DispatchQueue.main.async {
+            if self.mapRegion.center.latitude.round(to: 4) == self.locationManager.userPosition.latitude.round(to: 4) {
+                self.isCenter = true
+            } else {
+                self.isCenter = false
+            }
         }
+        
     }
 
     private func updateMapRegion(shelter: Shelter) {

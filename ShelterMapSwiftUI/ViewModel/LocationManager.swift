@@ -9,18 +9,32 @@ import Foundation
 import MapKit
 import SwiftUI
 import CoreLocation
+import WidgetKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+    static let shared = LocationManager()
     
     @Published var manager: CLLocationManager = .init()
     @Published var userPosition: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 24.140793, longitude: 120.676250)
     @Published var pastUserPosition: CLLocationCoordinate2D = .init()
     @Published var currentLocation: CLLocation = .init()
     
+    @Published var isFollow: Bool = false
+    
     @Published var mapRegion: MKCoordinateRegion = MKCoordinateRegion()
     
-    static let shared = LocationManager()
+    @Published var speeds = [CLLocationSpeed]()
+    @Published var speedDouble = 0.0
+    @Published var speedInt = 0
     
+    var avgSpeed: CLLocationSpeed {
+        return speeds.reduce(0,+)/Double(speeds.count) //the reduce returns the sum of the array, then dividing it by the count gives its average
+    }
+    var topSpeed: CLLocationSpeed {
+        return speeds.max() ?? 0 //return 0 if the array is empty
+    }
+
     override init() {
         super.init()
         
@@ -29,7 +43,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.requestAlwaysAuthorization()
         
         getLocation()
-
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.stopMonitoringLocation()
+        }
     }
     
     func requestUserLocation() {
@@ -43,6 +60,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         manager.startUpdatingLocation()
         manager.startMonitoringVisits()
         manager.startMonitoringSignificantLocationChanges()
+        
+        print(userPosition)
 //        manager.allowsBackgroundLocationUpdates = true
 //        manager.pausesLocationUpdatesAutomatically = false
     }
@@ -60,10 +79,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         pastUserPosition = userPosition
         userPosition = locationValue
         
+        let location = locations[0]
+        speeds.append(contentsOf: locations.map{$0.speed}) //append all new speed updates to the array
+        
+        // m/s to km/h
+        let kmt = location.speed * (18/5)
+        speedDouble = Double(kmt)
+        speedInt = Int(kmt)
+        
+        UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(speedInt, forKey: "speedInt")
+        UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(userPosition.latitude, forKey: "userPositionLatitude")
+        UserDefaults(suiteName: "group.com.novachen.ShelterMapSwiftUI")!.set(userPosition.longitude, forKey: "userPositionLongitude")
+
         UserDefaults.standard.set(userPosition.latitude, forKey: "userCurrentPositionLAT")
         UserDefaults.standard.set(userPosition.longitude, forKey: "userCurrentPastPositionLON")
-        UserDefaults.standard.set(pastUserPosition.latitude, forKey: "userPastPositionLAT")
-        UserDefaults.standard.set(pastUserPosition.longitude, forKey: "userPastPositionLON")
+//        UserDefaults.standard.set(pastUserPosition.latitude, forKey: "userPastPositionLAT")
+//        UserDefaults.standard.set(pastUserPosition.longitude, forKey: "userPastPositionLON")
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -76,8 +107,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    func startMonitoringLocation() {
+        manager.startMonitoringSignificantLocationChanges()
+        manager.startMonitoringVisits()
+        manager.startUpdatingLocation()
+    }
+    
     func stopMonitoringLocation() {
         manager.stopMonitoringSignificantLocationChanges()
+        manager.stopMonitoringVisits()
         manager.stopUpdatingLocation()
     }
     
